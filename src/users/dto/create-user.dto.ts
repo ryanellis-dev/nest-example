@@ -1,6 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsEmail,
+  IsString,
   Validate,
   ValidationArguments,
   ValidatorConstraint,
@@ -20,13 +21,14 @@ export class CustomAgeRange implements ValidatorConstraintInterface {
 
 export class CreateUserDto {
   @ApiProperty()
-  name: string;
-
-  @ApiProperty()
   @IsEmail()
   email: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional()
+  @IsString()
+  name: string;
+
+  @ApiPropertyOptional({
     description: 'The age of the user',
     minimum: 0,
     default: 10,
